@@ -1,0 +1,181 @@
+// Mixins.
+
+@mixin nl {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    list-style: none;
+    list-style-position: outside;
+}
+
+@mixin cf {
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    .lt-ie8 & {
+        zoom: 1;
+    }
+}
+
+@mixin blocks-justify {
+    text-align: justify;
+    text-justify: newspaper;
+}
+
+// You can add your own mixins here:
+
+// Adaptive font size
+@mixin adaptive-font($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $addMobSize: $addSize + $addSize * 0.7;
+  
+    @media (max-width: $media_desktop) {
+      font-size: calc(
+        #{$mobSize + px} + #{$addMobSize} *
+          ((100vw - #{$minWidthScreen + px}) / #{$maxWidthScreen})
+      );
+    }
+  
+    @media (min-width: $media_desktop) {
+      font-size: calc(
+        #{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidthScreen})
+      );
+    }
+  }
+  // @include adaptive-font(40, 24);
+  
+  // Adaptive value size
+  @mixin adaptive-value($property, $startSize, $minSize, $type) {
+    $addSize: $startSize - $minSize;
+    @if $type==1 {
+      //если < container
+      #{$property}: $startSize + px;
+      @media screen and (max-width: #{$maxWidthContainer + px}) {
+        #{$property}: calc(
+          #{$minSize + px} + #{$addSize} *
+            (
+              (100vw - #{$minWidthScreen + px}) / #{$maxWidthContainer -
+                $minWidthScreen}
+            )
+        );
+      }
+    } @else if $type==2 {
+      //если > container
+      #{$property}: $startSize + px;
+      @media screen and (min-width: #{$maxWidthContainer + px}) {
+        #{$property}: calc(
+          #{$minSize + px} + #{$addSize} *
+            (
+              (100vw - #{$minWidthScreen + px}) / #{$maxWidthScreen -
+                $minWidthScreen}
+            )
+        );
+      }
+    } @else {
+      // всегда type 0
+      #{$property}: calc(
+        #{$minSize +
+          px} +
+          #{$addSize} *
+          (
+            (100vw - #{$minWidthScreen + px}) /
+              #{$maxWidthScreen -
+              $minWidthScreen}
+          )
+      );
+    }
+  }
+  // @include adaptive-value("padding", 50, 20, 0);
+
+
+// Typography
+@mixin typography($type) {
+    @if $type ==display-1 {
+      font-size: 60px;
+      line-height: 1.08;
+      font-weight: 600;
+    }
+  
+    // HEADINGS
+    @else if $type ==heading-1 {
+        @include adaptive-font(80, 80);
+        line-height: 156px;
+        font-weight: 800;
+    } @else if $type ==heading-2 {
+        @include adaptive-font(80, 80);
+        line-height: 156px;
+        font-weight: 800;
+    } @else if $type ==heading-3 {
+        @include adaptive-font(40, 40);
+        line-height: 86px;
+        font-weight: 800;
+    } @else if $type ==heading-4 {
+        @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==heading-5 {
+        @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==heading-6 {
+        @include adaptive-font($pcSize, $mobSize);
+    }
+  
+    // SUBTITLES
+    @else if $type ==subtitle-1 {
+        @include adaptive-font(22, 22);
+        line-height: 32px;
+        font-weight: 400;
+        letter-spacing: 8px;
+    } @else if $type ==subtitle-2 {
+        @include adaptive-font(18, 18);
+        line-height: 22px;
+        font-weight: 400;
+        letter-spacing: 8px;
+    } @else if $type ==subtitle-3 {
+        @include adaptive-font($pcSize, $mobSize);
+    }
+  
+    // PARAGRAPHS
+    @else if $type ==paragraph-strong-1 {
+        @include adaptive-font(12, 12);
+        line-height: 1;
+        font-weight: 500;
+    } @else if $type ==paragraph-strong-2 {
+        @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==paragraph-strong-3 {
+        @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==paragraph-1 {
+        @include adaptive-font(16, 16);
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 300;
+    } @else if $type ==paragraph-2 {
+        @include adaptive-font($pcSize, $mobSize);  
+    } @else if $type ==paragraph-3 {
+        @include adaptive-font($pcSize, $mobSize);
+    }
+  
+    // CAPTIONS
+    @else if $type ==caption-1 {
+      @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==caption-2 {
+      @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==caption-3 {
+      @include adaptive-font($pcSize, $mobSize);
+    }
+    // LABELS
+    @else if $type ==label-1 {
+      @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==label-2 {
+      @include adaptive-font($pcSize, $mobSize);
+    } @else if $type ==quote-1 {
+      @include adaptive-font($pcSize, $mobSize);
+      font-style: italic;
+    } @else {
+      @error 'Unknown typography type: #{$type}. Please, double-check or add new one...';
+    }
+  }

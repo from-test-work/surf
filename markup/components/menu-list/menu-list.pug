@@ -1,0 +1,9 @@
+include ../icon/icon
+
+mixin menu-list(data)
+    +b('ul').menu-list
+        each item in data.items
+            +e('li').item
+                +e('a').link(href= item.href)
+                    +icon({icon: item.name, class: 'icon-menu'})
+                    +e.menu= item.menu

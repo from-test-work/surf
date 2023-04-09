@@ -1,0 +1,23 @@
+.menu-list{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  &__item{}
+  &__link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: currentColor;
+  }
+  .icon-menu{
+
+  }
+  &__menu{
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: capitalize;
+  }
+}

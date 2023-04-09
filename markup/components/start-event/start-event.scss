@@ -1,0 +1,41 @@
+.start-event {
+  display: grid;
+  grid-template-areas:
+    "date date"
+    "month ears";
+  gap: 16px;
+
+  &__date {
+    grid-area: date;
+    font-size: 50px;
+    line-height: 1;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  &__month {
+    grid-area: month;
+  }
+
+  &__ears {
+    grid-area: ears;
+  }
+
+  &__month,
+  &__ears {
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 300;
+    letter-spacing: 1.4px;
+  }
+
+  &__month+&__ears {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '|';
+      left: -10px;
+    }
+  }
+}

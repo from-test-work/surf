@@ -1,0 +1,261 @@
+// Common styles of the project
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.page {}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--white);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darken(desaturate(map-get($colors, accent), 27.19), 15.69);
+}
+
+.section-intro, 
+.main-slider {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-wrapper {
+  position: relative;
+}
+
+.main-slider .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: end;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: grab;
+
+  height: 100vh;
+  padding: 40px 20px 40px 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 40px 80px 40px 0;
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(62.09% 62.09% at 42.87% 49.23%,
+        rgba(34, 34, 34, 0.426517) 0%,
+        #0f0f0f 100%);
+  }
+}
+
+.main-slider__cnt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+
+  padding-bottom: 80px;
+  z-index: var(--z-index-3);
+
+  .section-info {
+    margin-top: 20px;
+  }
+
+  @media screen and (min-height: 699px) {
+    .section-info {
+      margin-top: 40px;
+    }
+  }
+}
+
+
+.main-slider__bigtitle {
+  font-weight: 800;
+  // font-size: 80px;
+  line-height: 1.13;
+  @include adaptive-font(80, 30);
+}
+
+.main-slider__subtitle {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  font-weight: 400;
+  @include adaptive-font(22, 18);
+  line-height: 1.45;
+  letter-spacing: 5px;
+  color: var(--alpha);
+  text-transform: uppercase;
+
+  &::after {
+    position: absolute;
+    content: '';
+    // width: 40px;
+    @include adaptive-value("width", 80, 40, 0);
+    height: 1px;
+    background: var(--alpha);
+    // left: -60px;
+    @include adaptive-value("left", -100, -60, 0);
+  }
+}
+
+.main-slider__arrow-right{
+  margin-top: 18px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: 40px;
+  z-index: var(--z-index-6);
+  cursor: pointer;
+
+  &:after {
+    content: '';
+  }
+}
+
+.swiper-button-next {
+  right: 20px;
+}
+
+.swiper-button-prev {
+  left: auto;
+  right: 60px;
+}
+
+.thumb-slider{
+  display: none;
+}
+
+.main-map{
+  position: absolute;
+  @include adaptive-value("width", 650, 350, 0);
+  top: 0;
+  right: 0;
+  z-index: var(--z-index-2);
+  &__text text,
+  &__way path{
+    visibility: hidden;
+    &.active {
+      visibility: initial;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-button-next {
+    right: 80px;
+  }
+
+  .swiper-button-prev {
+    right: 120px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .thumb-slider {
+    position: absolute;
+    display: initial;
+
+    max-width: 960px;
+    height: 40px;
+    z-index: var(--z-index-3);
+    bottom: 40px;
+    right: 80px;
+
+    margin-left: initial;
+    margin-right: initial;
+  
+    .swiper-slide {
+      width: 150px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-top: 4px solid;
+      border-color: var(--white);
+      cursor: pointer;
+      
+      &:last-child {
+        margin-right: 0 !important;
+      }
+
+      &.swiper-slide-thumb-active{
+        border-color: var(--accent);
+      }
+    }
+    .fraction{
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 29px;
+    }
+    .text{
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+}
+
+@media screen and (min-width: 1367px) {
+  .thumb-slider {
+    .swiper-slide {
+      width: 200px;
+    }
+  }
+}

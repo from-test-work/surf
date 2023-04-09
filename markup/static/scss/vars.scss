@@ -1,0 +1,39 @@
+// File for scss-vars.
+// For example: main colors, paddings and so on.
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --accent: #4af6cd;
+  --alpha: rgba(255, 255, 255, 0.5);
+
+  --z-index-1: 1; // for crawling elements in the general flow
+  --z-index-2: 2; // for crawling elements in the general flow
+  --z-index-3: 3; // for masks
+  --z-index-4: 4; // for sitebars
+  --z-index-5: 5; // for modals
+  --z-index-6: 6; // for elements that overlap all
+}
+
+$minWidthScreen: 320;
+$maxWidthScreen: 1440;
+$maxWidthContainer: 1280;
+
+$media_tablet: 768px;
+$media_desktop: 1240px;
+
+$colors: (
+  white: #fff,
+  black: #000,
+  accent: #4af6cd,
+);
+
+$mouse-hover: '(hover: hover) and (pointer: fine)';
+
+.button-example {
+  background-color: red;
+
+  @media #{$mouse-hover} {
+    background: black;
+  }
+}
